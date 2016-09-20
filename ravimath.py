@@ -1,7 +1,12 @@
 ##### To Import Packages########
 import math
+import os
 
 ##### End of Packages#########
+
+##### Welcom Message#########
+print "Welcome to Ravi's Math programs"
+##### End of Welcome Messages #########
 
 
 frect_area = 0
@@ -50,35 +55,57 @@ def conv_cmtoinches(x):
     print x +" centimeter is equal to " + str(inches)+" inches"
     return inches
 
+##################### Geometrical Shapes functions ##############################
+
 def rect_area(x,y):
-    area = float(x) * float(y)
+    rectarea = float(x) * float(y)
     # I am experiementing with  globalvariables,the idea is to count the number of times
     # this function has been called during a program execution, hence increamenting the frect_area variable by 1 each time
     # this function is called
     global frect_area
     frect_area = frect_area+1
     print "The Area of Rectangle is : " + str(area) +" sqcm"
-    return area
+    return rectarea
 
 def rect_perimeter(x,y):
-    p = 2*(float(x) + float(y))
+    rectperimeter = 2*(float(x) + float(y))
     global frect_perimeter
     frect_perimeter = frect_perimeter+1
     print "The Perimeter of Rectangle is : " + str(p) +" cm"
-    return p
+    return rectperimeter
 def circle_area(r):
-    area= 2* math.pi * float(r) **2
-    print "Area of a circle with a given radius of "+ str(r)+ " is "+ str(area)
-    return area
+    circlearea= 2* math.pi * float(r) **2
+    print "Area of a circle with a given radius of "+ str(r)+ " is "+ str(area)+ " sqcm"
+    return circlearea
 def circle_circum(r):
-    circum = 2*math.pi*float(r)
+    circlecircum = 2*math.pi*float(r)
     print "Circumference of a circle with a given radius of "+ str(r)+ " is "+ str(circum)
-    return circum
-def future_value(p,r,t):
-    fv= float(p) *(1+(0.01*float(r)))*float(t)
-    print "The future value of amt $"+str(p)+" at a given interest rate of "+str(r)+"%"+'\n'
-    print "for a duration of "+str(t)+" years is $"+str(fv)
-    return fv
+    return circlecircum
+
+def tri_areaH(s1,s2,s3):
+    # this is calculated as per Heron's formula for area of a triangle with the length of 3 given sides
+    #sp is semi perimeter
+    #sp=(float(s1)+float(s2)+float(s3))/2
+    s1=float(s1)
+    s2=float(s2)
+    s3=float(s3)
+    sp=(s1+s2+s3)/2
+    if sp == s1 or sp == s2 or sp == s3: 
+        print "Impossible triangle exiting/returning"
+        return "Impossible triangle"
+    else:
+        '''
+        print "all ok"
+        print "sp = " + str(sp)
+        print "s1 = " + str(s1)
+        print "s2 = " + str(s2)
+        print "s3 = " + str(s3)
+        #print str(float(s1))
+        #print str(sp*(sp-float(s1))*(sp-float(s2))*(sp-float(s3)))
+        '''    
+        triarea=math.sqrt(sp*(sp-s1)*(sp-s2)*(sp-s3))
+        print "Area of a triangle with sides "+ str(s1)+ "cm, "+ str(s2)+ "cm, "+str(s3)+"cm is "+ str(format(triarea, '.2f'))+ " sqcm"
+        return triarea
 
 def distance_calc(x1,y1,x2,y2):
     x=float(x1)-float(x2)
@@ -88,12 +115,36 @@ def distance_calc(x1,y1,x2,y2):
     print "The distance between ("+str(x1)+","+str(y1)+") and ("+ str(x2)+","+str(y2)+") is "+str(distance)
     return distance
 
-def tri_areaheron(x,y,z):
-    #calc s=half of (x+y+z)
-    s= 0.5(x+y+z)
-    tarea = math.sqrt(s*(s-x)*(s-y)*(s-z))
-    print "the area of a triangle with sides "+ str(x)+" " +str(y)+ " " + str(z)+ " is " + str(tarea)+ " sqcm"
-    return tarea
+def tri_areawithcoordinates():
+    print "To Calculate Area of Triangle using Heron's forumula when the coordinate of the vertices are given"
+    try:
+        input = raw_input("Enter coordinates of vertices x1,y1,x2,y2,x3,y3 separated by commas: ")
+
+        input_list = input.split(',')
+        numbers = [float(x.strip()) for x in input_list]
+        print str(numbers)
+        print str(len(numbers))
+        s1=distance_calc(numbers[0],numbers[1],numbers[2],numbers[3])
+        s2=distance_calc(numbers[2],numbers[3],numbers[4],numbers[5])
+        s3=distance_calc(numbers[0],numbers[1],numbers[4],numbers[5])
+        ta=tri_areaH(s1,s2,s3)
+    
+    except:
+        print "Please enter comma separated numbers"
+        print "error "+str(IOError)
+    
+    finally:
+        print "In the finally clause"
+        return ta
+
+################################# End of Shapes ##############################
+
+def future_value(p,r,t):
+    fv= float(p) *(1+(0.01*float(r)))*float(t)
+    print "The future value of amt $"+str(p)+" at a given interest rate of "+str(r)+"%"+'\n'
+    print "for a duration of "+str(t)+" years is $"+str(fv)
+    return fv
+
 
 
 '''
@@ -113,6 +164,10 @@ print "To convert Inches to Centimeters"
 conv_inchestocm(raw_input("Please Enter Inches to convert to Cm: "))
 print "To convert Centimeters to Inches"
 conv_cmtoinches(raw_input("Please Enter Centimeters to convert to Inches: "))
+print "To convert F to K"
+conv_ftok(raw_input("Please Enter fahrenheit to Convert to Kelvin: "))
+
+# From here it is Geometry
 print "To Calculate the area of a Circle when its radius is given"
 circle_area(raw_input("Please Enter radius in cm: "))
 print "To Calculate the Circumference of a Circle when its radius is given"
@@ -120,14 +175,23 @@ circle_circum(raw_input("Please Enter radius in cm: "))
 print "To Calculate the Future value of principle amount when the interest rate and the number of years is given"+'\n'
 future_value(raw_input("Please Enter Principle in $: "),raw_input("Please Enter Rate of interest: "),raw_input("Please Enter numer of years: "))
 
-# This is Geometry
 print "When the coordinates are given find the distance between them"+'\n'
 distance_calc(raw_input("Please Enter Position of x1: "),raw_input("Please Enter Position of y1: "),raw_input("Please Enter Position of x2: "),raw_input("Please Enter Position of y2: "))
 
 
 print "When the sides of a triangle are given we can calculate the area using heron's formula"+'\n'
-tri_areaheron(raw_input("Please Enter lenght of side a in cm: "),raw_input("Please Enter lenght of side b in cm: "),raw_input("Please Enter Plenght of side c in cm:: "))
-'''
+tri_areaH(raw_input("Please Enter length of side a in cm: "),raw_input("Please Enter length of side b in cm: "),raw_input("Please Enter length of side c in cm:: "))
 
-print "To convert F to K"
-conv_ftok(raw_input("Please Enter fahrenheit to Cconvert to Kelvin: "))
+
+
+print "To Calculate Area of Triangle using Heron's forumula when the length of the 3 sides is given"
+#tri_areaH(10,20,30)
+#tri_areaH(1,2,3)
+#tri_areaH(4,5,6)
+#tri_areaH(4.5,5.5,6.5)
+#tri_areaH(4500,5500,6500)
+
+print "To Calculate Area of Triangle using Heron's forumula when the coordinate of the vertices are given"
+tri_areawithcoordinates()
+'''
+         
