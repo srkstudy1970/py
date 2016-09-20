@@ -1,6 +1,8 @@
 ##### To Import Packages########
 import math
 import os
+import random
+
 
 ##### End of Packages#########
 
@@ -145,7 +147,20 @@ def future_value(p,r,t):
     print "for a duration of "+str(t)+" years is $"+str(fv)
     return fv
 
-
+def print_digits(number):
+	"""Prints the tens and ones digit of an integer in [0,100)."""
+	
+	print "The tens digit is " + str(number // 10) + ",",
+	print "and the ones digit is " + str(number % 10) + "."
+def powerball():
+    """Prints Powerball lottery numbers."""
+    
+    print "Today's numbers are " + str(random.randrange(1, 60)) + ",",
+    print str(random.randrange(1, 60)) + ",",
+    print str(random.randrange(1, 60)) + ",",
+    print str(random.randrange(1, 60)) + ", and",
+    print str(random.randrange(1, 60)) + ". The Powerball number is",
+    print str(random.randrange(1, 60)) + "."
 
 '''
 rect_area(raw_input("Please Enter Length in cm: "),raw_input("Please Enter Breadth in cm: "))
@@ -194,4 +209,7 @@ print "To Calculate Area of Triangle using Heron's forumula when the length of t
 print "To Calculate Area of Triangle using Heron's forumula when the coordinate of the vertices are given"
 tri_areawithcoordinates()
 '''
-         
+print_digits(98)
+powerball()
+powerball()
+powerball()
