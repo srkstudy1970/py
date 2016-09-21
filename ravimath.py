@@ -11,6 +11,7 @@ print "Welcome to Ravi's Math programs"
 ##### End of Welcome Messages #########
 
 
+
 frect_area = 0
 frect_perimeter=0
 
@@ -146,7 +147,7 @@ def future_value(p,r,t):
     print "The future value of amt $"+str(p)+" at a given interest rate of "+str(r)+"%"+'\n'
     print "for a duration of "+str(t)+" years is $"+str(fv)
     return fv
-
+########## Math functions #############
 def print_digits(number):
 	"""Prints the tens and ones digit of an integer in [0,100)."""
 	
@@ -161,7 +162,31 @@ def powerball():
     print str(random.randrange(1, 60)) + ", and",
     print str(random.randrange(1, 60)) + ". The Powerball number is",
     print str(random.randrange(1, 60)) + "."
+def is_even(num):
 
+    print "Inside is even function " + str(num)
+    ev = num % 2
+    if ev == 0:
+        print "This is even number"
+    else:
+        print "this is odd number"
+    return ev
+def is_leap_year(year):
+    """
+    Returns whether the given Gregorian year is a leap year.
+    """	
+    return ((year % 4) == 0 and ((year % 100) != 0 or (year % 400) == 0))
+def testleap(year):
+    """Tests the is_leapyear function."""
+    if is_leap_year(year):
+        print year, "is a leap year."
+        ly= 'True'
+        return ly
+    else:
+        print year, "is not a leap year."
+        ly= 'False'
+        return ly
+########## Math functions #############
 '''
 rect_area(raw_input("Please Enter Length in cm: "),raw_input("Please Enter Breadth in cm: "))
 rect_perimeter(raw_input("Please Enter Length in cm: "),raw_input("Please Enter Breadth in cm: "))
@@ -208,8 +233,21 @@ print "To Calculate Area of Triangle using Heron's forumula when the length of t
 
 print "To Calculate Area of Triangle using Heron's forumula when the coordinate of the vertices are given"
 tri_areawithcoordinates()
-'''
+
+print "The below function will split the number and gives the digits in 10's place and 1's place when a 2 digit number is given"
 print_digits(98)
+
+print '\n'+ "The Below function will call the random numbers and simulate the powerball lottery"
 powerball()
 powerball()
 powerball()
+is_even(7)
+'''
+
+t=testleap(1990)
+print t
+t=testleap(2000)
+print t
+t=testleap(2002)
+print t
+
