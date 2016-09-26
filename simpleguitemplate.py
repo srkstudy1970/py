@@ -1,7 +1,7 @@
 # SimpleGUI program template
 
 # Import the module
-import simplegui
+import simpleguitk as simplegui
 
 # Define global variables (program state)
 
